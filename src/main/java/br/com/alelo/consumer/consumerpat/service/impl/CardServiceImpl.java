@@ -15,9 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -69,8 +66,30 @@ public class CardServiceImpl implements CardService {
         return cardMapper.toResponse(savedBalanceForCard);
     }
 
+    @Override
+    public CardResponse findCardNumber(String cardNumber) {
+        log.info("Find card by number = {}", cardNumber);
+
+        Card card = cardRepository.findByCardNumber(cardNumber)
+                .orElseThrow(() -> new BusinessException("Card not found", HttpStatus.NOT_FOUND));
+
+        return cardMapper.toResponse(card);
+    }
+
+    @Override
+    public CardResponse activeCard(String cardNumber) {
+        log.info("Active card by number = {}", cardNumber);
+
+        Card card = cardRepository.findByCardNumber(cardNumber)
+                .orElseThrow(() -> new BusinessException("Card not found", HttpStatus.NOT_FOUND));
+
+        validateCard(card);
+
+        return cardMapper.toResponse(card);
+    }
+
     private void validateActiveCard(Card card) {
-        if(!card.isActive()){
+        if (!card.isActive()) {
             throw new BusinessException("The card informed is not active", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
@@ -83,9 +102,9 @@ public class CardServiceImpl implements CardService {
         String storesNumbers = "";
 
         int index = -1;
-        for( int i = 0; i < 16; i++ ) {
-            index = random.nextInt( numbers.length() );
-            storesNumbers += numbers.substring( index, index + 1 );
+        for (int i = 0; i < 16; i++) {
+            index = random.nextInt(numbers.length());
+            storesNumbers += numbers.substring(index, index + 1);
             card.setCardNumber(storesNumbers);
         }
     }
@@ -99,5 +118,14 @@ public class CardServiceImpl implements CardService {
                 }
             }
         }
+    }
+
+    private void validateCard(Card card) {
+        if (!card.isActive()) {
+            card.setActive(true);
+        } else {
+            card.setActive(false);
+        }
+        cardRepository.save(card);
     }
 }

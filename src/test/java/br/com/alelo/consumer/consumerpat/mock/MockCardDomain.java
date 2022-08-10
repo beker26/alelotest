@@ -81,4 +81,25 @@ public class MockCardDomain {
                 .consumer(MockConsumerDomain.buildConsumer())
                 .build();
     }
+
+    public static Card buildCardActiveFalse() {
+        return Card.builder()
+                .cardtype(CardType.FUEL)
+                .active(false)
+                .cardBalance(BigDecimal.valueOf(500))
+                .id(1L)
+                .cardNumber("9557596836147377")
+                .consumer(MockConsumerDomain.buildConsumer())
+                .build();
+    }
+
+    public static CardResponse buildCardResponseActiveFalse() {
+        return CardResponse.builder()
+                .cardtype(CardType.FOOD)
+                .active(false)
+                .cardBalance(BigDecimal.valueOf(100))
+                .id(1L)
+                .cardNumber("9557596836147377")
+                .build();
+    }
 }

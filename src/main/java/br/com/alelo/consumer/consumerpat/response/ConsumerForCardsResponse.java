@@ -1,6 +1,5 @@
 package br.com.alelo.consumer.consumerpat.response;
 
-import br.com.alelo.consumer.consumerpat.domain.Card;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

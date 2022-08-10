@@ -4,7 +4,6 @@ import br.com.alelo.consumer.consumerpat.domain.Consumer;
 import br.com.alelo.consumer.consumerpat.exception.BusinessException;
 import br.com.alelo.consumer.consumerpat.mapper.ConsumerMapper;
 import br.com.alelo.consumer.consumerpat.request.ConsumerRequest;
-import br.com.alelo.consumer.consumerpat.response.ConsumerForCardsResponse;
 import br.com.alelo.consumer.consumerpat.response.ConsumerResponse;
 import br.com.alelo.consumer.consumerpat.respository.ConsumerRepository;
 import br.com.alelo.consumer.consumerpat.respository.ExtractRepository;
@@ -16,8 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j

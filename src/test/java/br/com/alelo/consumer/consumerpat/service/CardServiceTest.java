@@ -132,4 +132,70 @@ public class CardServiceTest {
         assertNotNull(exception);
         assertEquals("The card informed is not active", exception.getMessage());
     }
+
+
+    @Test
+    @DisplayName("CardServiceTest Test find Card Number success")
+    void testFindCardNumber() throws BusinessException {
+
+        when(cardRepository.findByCardNumber(any())).thenReturn(Optional.of(MockCardDomain.buildCard()));
+        when(cardMapper.toResponse(any())).thenReturn(MockCardDomain.buildCardResponse());
+
+        CardResponse cardResponse = cardService.findCardNumber("9557596836147377");
+
+        assertNotNull(cardResponse);
+    }
+
+    @Test
+    @DisplayName("CardServiceTest Test find Card Number not found")
+    void testFindCardNumberNotFound() throws BusinessException {
+
+        when(cardRepository.findByCardNumber(any())).thenReturn(Optional.empty());
+
+        BusinessException exception = assertThrows(BusinessException.class, () -> cardService.findCardNumber("9557596836147377"));
+
+        assertNotNull(exception);
+        assertEquals("Card not found", exception.getMessage());
+    }
+
+
+    @Test
+    @DisplayName("CardServiceTest Test Active Card true success")
+    void testActiveTrueCard() throws BusinessException {
+
+        when(cardRepository.findByCardNumber(any())).thenReturn(Optional.of(MockCardDomain.buildCardActiveFalse()));
+        when(cardMapper.toResponse(any())).thenReturn(MockCardDomain.buildCardResponse());
+
+        CardResponse cardResponse = cardService.activeCard("9557596836147377");
+
+        assertNotNull(cardResponse);
+        assertEquals(true, cardResponse.isActive());
+    }
+
+    @Test
+    @DisplayName("CardServiceTest Test Active Card false success")
+    void testActiveFalseCard() throws BusinessException {
+
+        when(cardRepository.findByCardNumber(any())).thenReturn(Optional.of(MockCardDomain.buildCard()));
+        when(cardMapper.toResponse(any())).thenReturn(MockCardDomain.buildCardResponseActiveFalse());
+
+        CardResponse cardResponse = cardService.activeCard("9557596836147377");
+
+        assertNotNull(cardResponse);
+        assertEquals(false, cardResponse.isActive());
+    }
+
+    @Test
+    @DisplayName("CardServiceTest Test Active Card Not Found")
+    void testActiveNotFound() throws BusinessException {
+
+        when(cardRepository.findByCardNumber(any())).thenReturn(Optional.empty());
+
+        BusinessException exception = assertThrows(BusinessException.class, () -> cardService.activeCard("9557596836147377"));
+
+        assertNotNull(exception);
+        assertEquals("Card not found", exception.getMessage());
+    }
+
+
 }

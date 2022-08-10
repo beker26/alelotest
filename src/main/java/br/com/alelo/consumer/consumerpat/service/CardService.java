@@ -10,4 +10,8 @@ public interface CardService {
     CardResponse createCardForConsumer(CardRequest cardRequest);
 
     CardResponse addBalanceForCard(String cardNumber, BigDecimal cardBalance);
+
+    CardResponse findCardNumber(String cardNumber);
+
+    CardResponse activeCard(String cardNumber);
 }

@@ -2,12 +2,7 @@ package br.com.alelo.consumer.consumerpat.controller;
 
 import br.com.alelo.consumer.consumerpat.config.ApiPageable;
 import br.com.alelo.consumer.consumerpat.request.ConsumerRequest;
-import br.com.alelo.consumer.consumerpat.response.ConsumerForCardsResponse;
 import br.com.alelo.consumer.consumerpat.response.ConsumerResponse;
-import br.com.alelo.consumer.consumerpat.domain.Consumer;
-import br.com.alelo.consumer.consumerpat.domain.Extract;
-import br.com.alelo.consumer.consumerpat.respository.ConsumerRepository;
-import br.com.alelo.consumer.consumerpat.respository.ExtractRepository;
 import br.com.alelo.consumer.consumerpat.service.ConsumerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -22,9 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.Date;
-import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/consumer", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +27,8 @@ public class ConsumerController {
 
     @ApiOperation(value = "Get all existing consumers", notes = "Get all existing data consumers", httpMethod = "GET")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Consumers data found", response = ConsumerResponse.class)
+            @ApiResponse(code = 200, message = "Consumers data found", response = ConsumerResponse.class),
+            @ApiResponse(code = 422, message = "Document already exists in base")
     })
     @GetMapping
     @ApiPageable

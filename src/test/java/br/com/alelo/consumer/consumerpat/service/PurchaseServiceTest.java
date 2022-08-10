@@ -2,17 +2,12 @@ package br.com.alelo.consumer.consumerpat.service;
 
 import br.com.alelo.consumer.consumerpat.config.ModelMapperConfig;
 import br.com.alelo.consumer.consumerpat.exception.BusinessException;
-import br.com.alelo.consumer.consumerpat.mapper.ConsumerMapper;
 import br.com.alelo.consumer.consumerpat.mapper.PurchaseMapper;
 import br.com.alelo.consumer.consumerpat.mock.MockCardDomain;
-import br.com.alelo.consumer.consumerpat.mock.MockConsumerDomain;
 import br.com.alelo.consumer.consumerpat.mock.MockPurchaseDomain;
-import br.com.alelo.consumer.consumerpat.response.ConsumerResponse;
 import br.com.alelo.consumer.consumerpat.response.ExtractResponse;
 import br.com.alelo.consumer.consumerpat.respository.CardRepository;
-import br.com.alelo.consumer.consumerpat.respository.ConsumerRepository;
 import br.com.alelo.consumer.consumerpat.respository.ExtractRepository;
-import br.com.alelo.consumer.consumerpat.service.impl.ConsumerServiceImpl;
 import br.com.alelo.consumer.consumerpat.service.impl.PurchaseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
