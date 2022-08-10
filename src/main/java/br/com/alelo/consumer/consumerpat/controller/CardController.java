@@ -25,8 +25,7 @@ public class CardController {
     @ApiOperation(value = "Creates a new card", notes = "Creates a new card for consumer", httpMethod = "POST")
     @ApiResponses({
             @ApiResponse(code = 201, message = "New create card successfully", response = CardResponse.class),
-            @ApiResponse(code = 422, message = "Consumer not found /" +
-                                               "This card is not accepted at this establishment")
+            @ApiResponse(code = 422, message = "Consumer not found")
     })
     @PostMapping
     public ResponseEntity<CardResponse> createCardForConsumer(@Validated @RequestBody CardRequest cardRequest) {
